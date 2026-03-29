@@ -28,14 +28,15 @@ class ScrapeWebsiteTool(BaseTool):
     args_schema: Type[BaseModel] = ScrapeWebsiteToolSchema
     website_url: Optional[str] = None
     cookies: Optional[dict] = None
-    headers: Optional[dict] = {
+    # (每次实例化都会重新生成的工厂函数)
+    headers: Optional[dict] = Field(default_factory=lambda: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
         "Accept-Language": "en-US,en;q=0.9",
         "Referer": "https://www.google.com/",
         "Connection": "keep-alive",
         "Upgrade-Insecure-Requests": "1",
-    }
+    })
 
     def __init__(
         self,
