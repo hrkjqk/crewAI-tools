@@ -25,8 +25,9 @@ class NL2SQLTool(BaseTool):
         title="Database URI",
         description="The URI of the database to connect to.",
     )
-    tables: list = []
-    columns: dict = {}
+    #  (安全的 default_factory)
+    tables: list = Field(default_factory=list)
+    columns: dict = Field(default_factory=dict)
     args_schema: Type[BaseModel] = NL2SQLToolInput
 
     def model_post_init(self, __context: Any) -> None:
